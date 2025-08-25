@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Happy Birthday Naiylaaa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Arial+Black&display=swap');
+
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: black;
+      font-family: 'Arial Black', 'Arial', sans-serif;
+    }
+
+    .floating-text {
+      position: absolute;
+      white-space: nowrap;
+      color: #fff;
+      opacity: 0.5;
+      font-size: 1em;
+      font-weight: 900;
+      z-index: 0;
+    }
+
+    .falling-love {
+      position: absolute;
+      top: -2em;
+      color: pink;
+      font-size: 2em;
+      animation: fallLove 5s linear infinite;
+      pointer-events: none;
+    }
+
+    .rising-love {
+      position: absolute;
+      bottom: -2em;
+      color: white;
+      font-size: 2em;
+      animation: riseLove 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes fallLove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
+
+    @keyframes riseLove {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .main-message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      z-index: 2;
+      max-width: 90vw;
+      word-break: break-word;
+    }
+
+    .text-3d-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .text-3d-back {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      color: hotpink;
+      opacity: 0.6;
+      font-weight: 900;
+      z-index: 0;
+    }
+
+    .text-3d-front {
+      font-weight: 900;
+      text-shadow: 0 0 15px rgba(255,255,255,0.8);
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(90deg, #ff66cc, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtext-3d {
+      margin-top: 15px;
+      font-size: 0.8em;
+      color: white;
+      text-shadow: 0 0 10px rgba(255,255,255,0.6);
+    }
+
+    /* CONFETTI */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: red;
+      opacity: 0.8;
+      animation: fallConfetti linear infinite;
+      z-index: 1;
+    }
+
+    @keyframes fallConfetti {
+      0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+      100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* TOMBOL PLAY/PAUSE */
+    #playBtn {
+      padding: 12px 20px;
+      border: none;
+      border-radius: 10px;
+      background: linear-gradient(45deg, deeppink, pink);
+      color: white;
+      font-weight: bold;
+      font-size: 1em;
+      cursor: pointer;
+      box-shadow: 0 0 10px rgba(255,255,255,0.5);
+      transition: transform 0.2s, background 0.3s;
+      margin-top: 30px;
+    }
+    #playBtn:hover {
+      transform: scale(1.1);
+      background: linear-gradient(45deg, hotpink, white);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TEKS UTAMA -->
+  <div class="main-message">
+    <div class="text-3d-container">
+      <h1 class="text-3d-back">🎂 HAPPY BIRTHDAY NAIYLAAA 🎉</h1>
+      <h1 class="text-3d-front">🎂 HAPPY BIRTHDAY NAIYLAAA 🎉</h1>
+    </div>
+
+    <!-- UCAPAN -->
+    <div class="subtext-3d">
+      <p>JADI PRIBADI YANG LEBIH BAIK YAAA,<br>I ALWAYS PROUD OF YOU 🤍</p>
+    </div>
+
+    <!-- TOMBOL PLAY / PAUSE MUSIK -->
+    <div style="text-align:center;">
+      <button id="playBtn">▶ Play Music</button>
+    </div>
+  </div>
+
+  <!-- AUDIO MUSIK -->
+  <audio id="bgMusic" loop>
+    <source src="Audio.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- TEKS MELAYANG -->
+  <script>
+    const totalTexts = 20;
+    const directions = ['top', 'left', 'right', 'bottom'];
+
+    for (let i = 0; i < totalTexts; i++) {
+      const el = document.createElement('div');
+      el.classList.add('floating-text');
+      el.innerText = 'HAPPY BIRTHDAY NAIYLAAA';
+
+      const direction = directions[i % directions.length];
+      const speed = 5 + Math.random() * 10;
+
+      if (direction === 'top') {
+        el.style.top = '100vh';
+        el.style.left = `${Math.random() * 80}vw`;
+        el.style.animation = `floatUp ${speed}s linear infinite`;
+      } else if (direction === 'left') {
+        el.style.top = `${Math.random() * 100}vh`;
+        el.style.left = '-50vw';
+        el.style.animation = `floatRight ${speed}s linear infinite`;
+      } else if (direction === 'right') {
+        el.style.top = `${Math.random() * 100}vh`;
+        el.style.left = '100vw';
+        el.style.animation = `floatLeft ${speed}s linear infinite`;
+      } else if (direction === 'bottom') {
+        el.style.top = '-50vh';
+        el.style.left = `${Math.random() * 80}vw`;
+        el.style.animation = `floatDown ${speed}s linear infinite`;
+      }
+
+      el.style.fontSize = `${0.8 + Math.random()}em`;
+      document.body.appendChild(el);
+    }
+
+    const styleSheet = document.createElement("style");
+    styleSheet.innerText = `
+      @keyframes floatUp {
+        from { transform: translateY(0); }
+        to { transform: translateY(-150vh); }
+      }
+      @keyframes floatRight {
+        from { transform: translateX(0); }
+        to { transform: translateX(150vw); }
+      }
+      @keyframes floatLeft {
+        from { transform: translateX(0); }
+        to { transform: translateX(-150vw); }
+      }
+      @keyframes floatDown {
+        from { transform: translateY(0); }
+        to { transform: translateY(150vh); }
+      }
+    `;
+    document.head.appendChild(styleSheet);
+  </script>
+
+  <!-- EMOJI LOVE MERAH JATUH -->
+  <script>
+    const totalHearts = 30;
+    for (let i = 0; i < totalHearts; i++) {
+      const love = document.createElement('div');
+      love.className = 'falling-love';
+      love.innerText = '❤️';
+      love.style.left = `${Math.random() * 100}vw`;
+      love.style.animationDelay = `${Math.random() * 10}s`;
+      love.style.fontSize = `${1 + Math.random()}em`;
+      document.body.appendChild(love);
+    }
+  </script>
+
+  <!-- EMOJI LOVE PUTIH NAIK -->
+  <script>
+    const totalWhiteHearts = 30;
+    for (let i = 0; i < totalWhiteHearts; i++) {
+      const love = document.createElement('div');
+      love.className = 'rising-love';
+      love.innerText = '🤍';
+      love.style.left = `${Math.random() * 100}vw`;
+      love.style.animationDelay = `${Math.random() * 10}s`;
+      love.style.fontSize = `${1 + Math.random()}em`;
+      document.body.appendChild(love);
+    }
+  </script>
+
+  <!-- CONFETTI -->
+  <script>
+    const colors = ['#ff4d94', '#ffffff', '#ff99cc', '#ffe6f2'];
+    const totalConfetti = 50;
+
+    for (let i = 0; i < totalConfetti; i++) {
+      const conf = document.createElement('div');
+      conf.className = 'confetti';
+      conf.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+      conf.style.left = `${Math.random() * 100}vw`;
+      conf.style.top = `${-Math.random() * 20}vh`;
+      conf.style.width = `${6 + Math.random() * 6}px`;
+      conf.style.height = conf.style.width;
+      conf.style.animationDuration = `${3 + Math.random() * 5}s`;
+      conf.style.animationDelay = `${Math.random() * 5}s`;
+      document.body.appendChild(conf);
+    }
+  </script>
+
+  <!-- SCRIPT PLAY/PAUSE -->
+  <script>
+    const btn = document.getElementById('playBtn');
+    const music = document.getElementById('bgMusic');
+
+    btn.addEventListener('click', () => {
+      if (music.paused) {
+        music.play();
+        btn.innerText = "⏸ Pause Music";
+      } else {
+        music.pause();
+        btn.innerText = "▶ Play Music";
+      }
+    });
+  </script>
+
+</body>
+</html>
